@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.Build.NoTargets">
+
+  <Import Project="../Shared/Common.targets" />
+  <Import Project="../Shared/Frameworks.targets" />
+
+  <PropertyGroup>
+    <Description>
+.NET Haiku runtime pack
+$(Description)
+    </Description>
+    <IncludeSymbols>false</IncludeSymbols>
+    <PackageID>Haiku.Runtime.haiku-x64</PackageID>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <_ManagedFiles Include="$(_HaikuRootDirectory)src/Haiku/bin/$(Configuration)/net$(_HaikuNetVersion)/Haiku.dll"
+                   CopyToOutputDirectory="PreserveNewest" Visible="false" Link="runtimes/haiku-x64/lib/net$(_HaikuNetVersion)/Haiku.dll"
+                   PackagePath="runtimes/haiku-x64/lib/net$(_HaikuNetVersion)" TargetPath="runtimes/haiku-x64/lib/net$(_HaikuNetVersion)" />
+
+    <_SymbolFiles Include="$(_HaikuRootDirectory)src/Haiku/bin/$(Configuration)/net$(_HaikuNetVersion)/Haiku.pdb" IsSymbolFile="true"
+                  CopyToOutputDirectory="PreserveNewest" Visible="false" Link="runtimes/haiku-x64/lib/net$(_HaikuNetVersion)/Haiku.pdb"
+                  PackagePath="runtimes/haiku-x64/lib/net$(_HaikuNetVersion)" TargetPath="runtimes/haiku-x64/lib/net$(_HaikuNetVersion)" />
+
+    <_NativeFiles Include="$(_HaikuRootDirectory)out/generated/libHaikuGlue.so" IsNative="true"
+                  CopyToOutputDirectory="PreserveNewest" Visible="false" Link="runtimes/haiku-x64/native/libHaikuGlue.so"
+                  PackagePath="runtimes/haiku-x64/native" TargetPath="runtimes/haiku-x64/native" />
+    <_NativeFiles Include="$(_HaikuRootDirectory)out/generated/libHaikuGlue.a" IsNative="true"
+                  CopyToOutputDirectory="PreserveNewest" Visible="false" Link="runtimes/haiku-x64/native/libHaikuGlue.a"
+                  PackagePath="runtimes/haiku-x64/native" TargetPath="runtimes/haiku-x64/native" />
+
+    <_PackageFiles Include="@(_ManagedFiles)" />
+    <_PackageFiles Include="@(_SymbolFiles)" />
+    <_PackageFiles Include="@(_NativeFiles)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(_HaikuRootDirectory)src/Haiku/Haiku.csproj" />
+  </ItemGroup>
+
+</Project>

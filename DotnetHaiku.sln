@@ -1,0 +1,100 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{00AAA5AE-73A1-4626-AE26-96524BFBFC9C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Haiku", "src\Haiku\Haiku.csproj", "{3D37BF92-4B86-4B10-8AAE-32168990A6D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workload", "workload", "{3E6BDB7A-2333-402A-8FBF-D543A575846F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AF0C9862-1AB0-46F2-BB93-02353ACAB8E9}"
+	ProjectSection(SolutionItems) = preProject
+		build.cake = build.cake
+		Directory.Build.props = Directory.Build.props
+		DotnetHaiku.snk = DotnetHaiku.snk
+		global.json = global.json
+		nuget.config = nuget.config
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Haiku.Ref", "workload\Haiku.Ref\Haiku.Ref.csproj", "{F02F6636-2076-4DA3-8848-EF9D3FC259CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Haiku.Runtime", "workload\Haiku.Runtime\Haiku.Runtime.csproj", "{5AD9E827-537F-4F15-AD9B-B0E813D7B5CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Haiku.Sdk", "workload\Haiku.Sdk\Haiku.Sdk.csproj", "{4F60F568-7A6A-4B86-8C91-F95AE223595B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trungnt2910.NET.Sdk.Haiku", "workload\Trungnt2910.NET.Sdk.Haiku\Trungnt2910.NET.Sdk.Haiku.csproj", "{1E0B25F7-FEB6-4952-8C54-1F3ADACDD5E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{050E2031-DA85-4DD5-AB76-A5D5F2BC4F56}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{596B4E98-800E-4A00-8BA0-EF78979CE146}"
+	ProjectSection(SolutionItems) = preProject
+		workload\Shared\Common.targets = workload\Shared\Common.targets
+		workload\Shared\Frameworks.targets = workload\Shared\Frameworks.targets
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmptyWindow", "sample\EmptyWindow\EmptyWindow.csproj", "{0186AB7A-292F-4322-9953-AB847FA04AAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "generator", "generator", "{11877CF2-D52B-494B-A3AC-63B03ACECDDD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HaikuApiGenerator", "generator\HaikuApiGenerator\HaikuApiGenerator.csproj", "{1A8BA232-2832-449B-A63B-F1513A3ACA51}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HaikuApiGenerator.PostProcessing", "generator\HaikuApiGenerator.PostProcessing\HaikuApiGenerator.PostProcessing.csproj", "{1970D702-EA2E-4C76-9F4F-D173755932A1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D37BF92-4B86-4B10-8AAE-32168990A6D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D37BF92-4B86-4B10-8AAE-32168990A6D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D37BF92-4B86-4B10-8AAE-32168990A6D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D37BF92-4B86-4B10-8AAE-32168990A6D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F02F6636-2076-4DA3-8848-EF9D3FC259CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F02F6636-2076-4DA3-8848-EF9D3FC259CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F02F6636-2076-4DA3-8848-EF9D3FC259CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F02F6636-2076-4DA3-8848-EF9D3FC259CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AD9E827-537F-4F15-AD9B-B0E813D7B5CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AD9E827-537F-4F15-AD9B-B0E813D7B5CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AD9E827-537F-4F15-AD9B-B0E813D7B5CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AD9E827-537F-4F15-AD9B-B0E813D7B5CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F60F568-7A6A-4B86-8C91-F95AE223595B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F60F568-7A6A-4B86-8C91-F95AE223595B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F60F568-7A6A-4B86-8C91-F95AE223595B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F60F568-7A6A-4B86-8C91-F95AE223595B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E0B25F7-FEB6-4952-8C54-1F3ADACDD5E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E0B25F7-FEB6-4952-8C54-1F3ADACDD5E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E0B25F7-FEB6-4952-8C54-1F3ADACDD5E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E0B25F7-FEB6-4952-8C54-1F3ADACDD5E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0186AB7A-292F-4322-9953-AB847FA04AAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0186AB7A-292F-4322-9953-AB847FA04AAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0186AB7A-292F-4322-9953-AB847FA04AAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0186AB7A-292F-4322-9953-AB847FA04AAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A8BA232-2832-449B-A63B-F1513A3ACA51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A8BA232-2832-449B-A63B-F1513A3ACA51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A8BA232-2832-449B-A63B-F1513A3ACA51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A8BA232-2832-449B-A63B-F1513A3ACA51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1970D702-EA2E-4C76-9F4F-D173755932A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1970D702-EA2E-4C76-9F4F-D173755932A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1970D702-EA2E-4C76-9F4F-D173755932A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1970D702-EA2E-4C76-9F4F-D173755932A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3D37BF92-4B86-4B10-8AAE-32168990A6D4} = {00AAA5AE-73A1-4626-AE26-96524BFBFC9C}
+		{F02F6636-2076-4DA3-8848-EF9D3FC259CA} = {3E6BDB7A-2333-402A-8FBF-D543A575846F}
+		{5AD9E827-537F-4F15-AD9B-B0E813D7B5CC} = {3E6BDB7A-2333-402A-8FBF-D543A575846F}
+		{4F60F568-7A6A-4B86-8C91-F95AE223595B} = {3E6BDB7A-2333-402A-8FBF-D543A575846F}
+		{1E0B25F7-FEB6-4952-8C54-1F3ADACDD5E3} = {3E6BDB7A-2333-402A-8FBF-D543A575846F}
+		{596B4E98-800E-4A00-8BA0-EF78979CE146} = {3E6BDB7A-2333-402A-8FBF-D543A575846F}
+		{0186AB7A-292F-4322-9953-AB847FA04AAA} = {050E2031-DA85-4DD5-AB76-A5D5F2BC4F56}
+		{1A8BA232-2832-449B-A63B-F1513A3ACA51} = {11877CF2-D52B-494B-A3AC-63B03ACECDDD}
+		{1970D702-EA2E-4C76-9F4F-D173755932A1} = {11877CF2-D52B-494B-A3AC-63B03ACECDDD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C7E38642-D6A3-451F-929A-4CAF0423329C}
+	EndGlobalSection
+EndGlobal

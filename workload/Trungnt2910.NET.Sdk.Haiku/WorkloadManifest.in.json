@@ -1,0 +1,28 @@
+{
+    "version": "@VERSION@",
+    "workloads": {
+      "haiku": {
+        "description": ".NET SDK Workload for building Haiku applications.",
+        "packs": [
+          "Haiku.Sdk",
+          "Haiku.Ref",
+          "Haiku.Runtime.haiku-x64"
+        ],
+        "platforms": [ "win-x64", "linux-x64", "osx-x64", "osx-arm64", "haiku-x64" ]
+      }
+    },
+    "packs": {
+      "Haiku.Sdk": {
+        "kind": "sdk",
+        "version": "@VERSION@"
+      },
+      "Haiku.Ref": {
+        "kind": "framework",
+        "version": "@VERSION@"
+      },
+      "Haiku.Runtime.haiku-x64": {
+        "kind": "framework",
+        "version": "@VERSION@"
+      }
+    }
+  }

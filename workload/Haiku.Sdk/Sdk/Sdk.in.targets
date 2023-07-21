@@ -1,0 +1,64 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- Register net8.0-haiku1.0 TFM -->
+  <ItemGroup>
+    <SupportedPlatform Include="haiku" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <_DefaultTargetPlatformVersion>@HAIKUVERSION@</_DefaultTargetPlatformVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetPlatformSupported>true</TargetPlatformSupported>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">$(_DefaultTargetPlatformVersion)</TargetPlatformVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SdkSupportedTargetPlatformVersion Include="@HAIKUVERSION@" />
+  </ItemGroup>
+
+  <!-- Register Haiku runtime -->
+  <ItemGroup>
+    <KnownFrameworkReference
+      Include="Haiku"
+      TargetFramework="net@HAIKUNETVERSION@"
+      RuntimeFrameworkName="Haiku"
+      DefaultRuntimeFrameworkVersion="**FromWorkload**"
+      LatestRuntimeFrameworkVersion="**FromWorkload**"
+      TargetingPackName="Haiku.Ref"
+      TargetingPackVersion="**FromWorkload**"
+      RuntimePackNamePatterns="Haiku.Runtime.haiku-x64"
+      RuntimePackRuntimeIdentifiers="haiku-x64"
+      Profile="Haiku"
+    />
+  </ItemGroup>
+
+  <!-- Reference Haiku runtime -->
+  <ItemGroup Condition=" '$(DisableImplicitFrameworkReferences)' != 'true' ">
+    <FrameworkReference
+      Include="Haiku"
+      IsImplicitlyDefined="true"
+      Pack="false"
+      PrivateAssets="All"
+    />
+  </ItemGroup>
+
+  <!-- Project properties -->
+  <PropertyGroup>
+    <_IsHaikuDefined>$([System.Text.RegularExpressions.Regex]::IsMatch('$(DefineConstants.Trim())', '(^|;)HAIKU($|;)'))</_IsHaikuDefined>
+    <DefineConstants Condition="!$(_IsHaikuDefined)">HAIKU;$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <_HaikuIsExe>false</_HaikuIsExe>
+    <_HaikuIsExe Condition="$(OutputType.Equals('exe', StringComparison.InvariantCultureIgnoreCase)) or $(OutputType.Equals('winexe', StringComparison.InvariantCultureIgnoreCase))">true</_HaikuIsExe>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(_HaikuIsExe)' == 'true'">
+    <!-- Must be self-contained. Framework-dependent builds cannot see our custom runtime. -->
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>haiku-x64</RuntimeIdentifier>
+  </PropertyGroup>
+
+</Project>

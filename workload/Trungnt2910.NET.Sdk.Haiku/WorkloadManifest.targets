@@ -1,0 +1,7 @@
+<Project>
+  <Import Project="Sdk.targets" Sdk="Haiku.Sdk" Condition="'$(TargetPlatformIdentifier)' == 'haiku'" />
+
+  <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETCoreApp' and $([MSBuild]::VersionGreaterThanOrEquals($(TargetFrameworkVersion), '6.0')) ">
+    <SdkSupportedTargetPlatformIdentifier Include="haiku" DisplayName="Haiku" />
+  </ItemGroup>
+</Project>

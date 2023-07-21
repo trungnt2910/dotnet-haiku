@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.Build.NoTargets">
+
+  <Import Project="../Shared/Common.targets" />
+  <Import Project="../Shared/Frameworks.targets" />
+
+  <PropertyGroup>
+    <Description>
+.NET Haiku targeting pack
+$(Description)
+    </Description>
+    <IncludeSymbols>false</IncludeSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <_ManagedFiles Include="$(_HaikuRootDirectory)src/Haiku/bin/$(Configuration)/net$(_HaikuNetVersion)/Haiku.dll"
+                   CopyToOutputDirectory="PreserveNewest" Visible="false" Link="ref/net$(_HaikuNetVersion)/Haiku.dll"
+                   PackagePath="ref/net$(_HaikuNetVersion)" TargetPath="ref/net$(_HaikuNetVersion)" />
+    <_DocumentationFiles Include="$(_HaikuRootDirectory)src/Haiku/bin/$(Configuration)/net$(_HaikuNetVersion)/Haiku.xml"
+                         CopyToOutputDirectory="PreserveNewest" Visible="false" Link="ref/net$(_HaikuNetVersion)/Haiku.xml"
+                         PackagePath="ref/net$(_HaikuNetVersion)" TargetPath="ref/net$(_HaikuNetVersion)" />
+
+    <_PackageFiles Include="@(_ManagedFiles)" />
+    <_PackageFiles Include="@(_DocumentationFiles)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(_HaikuRootDirectory)src/Haiku/Haiku.csproj" />
+  </ItemGroup>
+
+</Project>

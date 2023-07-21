@@ -1,0 +1,14 @@
+<Project>
+  <PropertyGroup>
+    <_HaikuVersion Condition=" '$(_HaikuVersion)' == '' ">1</_HaikuVersion>
+    <_HaikuNetVersion Condition=" '$(_HaikuNetVersion)' == '' ">8.0</_HaikuNetVersion>
+    <_HaikuTfm>net$(_HaikuNetVersion)-haiku</_HaikuTfm>
+    <_HaikuFullTfm>net$(_HaikuNetVersion)-haiku$(_HaikuVersion)</_HaikuFullTfm>
+    <_HaikuRootDirectory>$(MSBuildThisFileDirectory)</_HaikuRootDirectory>
+    <_HaikuManifestVersionBand Condition=" '$(_HaikuManifestVersionBand)' == '' ">8.0.100</_HaikuManifestVersionBand>
+
+    <RepositoryUrl Condition=" '$(RepositoryUrl)' == '' ">https://github.com/trungnt2910/dotnet-haiku</RepositoryUrl>
+    <RepositoryType Condition=" '$(RepositoryType)' == '' ">git</RepositoryType>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net$(_HaikuNetVersion)</TargetFramework>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Ignore those spam warnings to filter out the real problems -->
+    <!-- No matching param tag in XML comment; Cref attribute cannot be resolved; Referenced assembly does not have a strong name -->
+    <NoWarn>$(NoWarn);CS1573;CS1574;CS8002</NoWarn>
+    <!-- Some more warnings from CppSharp -->
+    <NoWarn>$(NoWarn);SYSLIB0003;CS1591</NoWarn>
+    <!--
+      Microsoft.DotNet.SharedFramework.Sdk requires our framework assemblies to be signed
+      (to have a "public key token")
+    -->
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(_HaikuRootDirectory)/DotnetHaiku.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.Versioning.SupportedOSPlatformAttribute">
+      <_Parameter1>Haiku</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="$(_HaikuRootDirectory)/out/generated/*.cs" />
+    <Compile Include="$(_HaikuRootDirectory)/external/CppSharp/src/Runtime/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(_HaikuRootDirectory)/generator/HaikuApiGenerator.PostProcessing/HaikuApiGenerator.PostProcessing.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <UsingTask TaskName="HaikuApiGenerator.PostProcessing.GeneratorCleanup"
+             AssemblyFile="$(_HaikuRootDirectory)/generator/HaikuApiGenerator.PostProcessing/bin/$(Configuration)/netstandard2.0/HaikuApiGenerator.PostProcessing.dll"
+            TaskFactory="TaskHostFactory" />
+
+  <Target Name="AssemblyPostProcessing" AfterTargets="CopyFilesToOutputDirectory">
+    <GeneratorCleanup AssemblyPath="$(OutputPath)/$(AssemblyName).dll" SnkPath="$(AssemblyOriginatorKeyFile)" />
+  </Target>
+
+</Project>

@@ -1,0 +1,33 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageType>DotnetPlatform</PackageType>
+    <PackageId>$(MSBuildProjectName)</PackageId>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <IncludeSymbols>false</IncludeSymbols>
+    <NoWarn>$(NoWarn);NU5100;NU5128;NU5130;NU5131</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>trungnt2910</Authors>
+    <Title>.NET Haiku - Custom TFM and workload for .NET $(_HaikuNetVersion)</Title>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/trungnt2910/dotnet-haiku</PackageProjectUrl>
+    <Description>
+This package is a part of .NET Haiku - an unofficial .NET SDK workload that provides the $(_HaikuTfm) TFM.
+It is not meant to be referenced directly from your project.
+
+To install .NET Haiku, please use the installer scripts from the project's website.
+    </Description>
+    <Copyright>Copyright (C) 2022 Trung Nguyen</Copyright>
+    <PackageTags>haiku</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(_HaikuRootDirectory)\README.md" Pack="true" PackagePath="\" />
+    <None Include="$(_HaikuRootDirectory)\LICENSE.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project>

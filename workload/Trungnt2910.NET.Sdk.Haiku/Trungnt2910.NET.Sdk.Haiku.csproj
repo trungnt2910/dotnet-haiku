@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.Build.NoTargets">
+
+  <Import Project="../Shared/Common.targets" />
+
+  <PropertyGroup>
+    <PackageId>$(PackageId).Manifest-$(_HaikuManifestVersionBand)</PackageId>
+    <Description>
+.NET Haiku workload manifest
+$(Description)
+    </Description>
+  </PropertyGroup>
+
+  <Import Project="$(_HaikuRootDirectory)eng/ReplaceText.targets" />
+
+  <ItemGroup>
+    <None Update="WorkloadManifest.targets" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="data" />
+    <None
+        Include="$(IntermediateOutputPath)WorkloadManifest.json"
+        Link="WorkloadManifest.json"
+        CopyToOutputDirectory="PreserveNewest"
+        Pack="true"
+        PackagePath="data"
+    />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Haiku.*/*.csproj" />
+  </ItemGroup>
+
+  <Target Name="_ReplaceJsonText"
+      BeforeTargets="Build;AssignTargetPaths">
+
+    <ReplaceText
+        Input="WorkloadManifest.in.json"
+        Output="$(IntermediateOutputPath)WorkloadManifest.json"
+        OldValue="@VERSION@"
+        NewValue="$(PackageVersion)"
+    />
+
+    <ReplaceText
+        Input="$(IntermediateOutputPath)WorkloadManifest.json"
+        Output="$(IntermediateOutputPath)WorkloadManifest.json"
+        OldValue="@HAIKUNETMAJORVERSION@"
+        NewValue="$([System.Version]::Parse($(_HaikuNetVersion)).ToString(1))"
+    />
+
+    <ItemGroup>
+      <FileWrites Include="$(IntermediateOutputPath)WorkloadManifest.json" />
+    </ItemGroup>
+
+  </Target>
+
+</Project>

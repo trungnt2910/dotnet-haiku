@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.Build.NoTargets">
+
+  <Import Project="../Shared/Common.targets" />
+
+  <PropertyGroup>
+    <Description>
+.NET Haiku SDK. Enabled via the $(_HaikuTfm) TFM.
+$(Description)
+    </Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="**/*.in.*" />
+    <None Update="@(None)" PackagePath="" CopyToOutputDirectory="PreserveNewest" Pack="true" />
+    <None Include="$(IntermediateOutputPath)Sdk.targets" Link="Sdk/Sdk.targets" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="Sdk" Visible="false" />
+  </ItemGroup>
+
+  <Import Project="$(_HaikuRootDirectory)eng/ReplaceText.targets" />
+
+  <Target Name="_ReplaceSdkText" BeforeTargets="Build;AssignTargetPaths" Inputs="$(MSBuildProjectFile);Sdk/Sdk.in.targets" Outputs="$(IntermediateOutputPath)Sdk.targets">
+
+    <ReplaceText Input="Sdk/Sdk.in.targets" Output="$(IntermediateOutputPath)Sdk.targets" OldValue="@HAIKUVERSION@" NewValue="$(_HaikuVersion)" />
+
+    <ReplaceText Input="$(IntermediateOutputPath)Sdk.targets" Output="$(IntermediateOutputPath)Sdk.targets" OldValue="@HAIKUNETVERSION@" NewValue="$(_HaikuNetVersion)" />
+
+    <ItemGroup>
+      <FileWrites Include="$(IntermediateOutputPath)Sdk.targets" />
+    </ItemGroup>
+
+  </Target>
+
+</Project>
