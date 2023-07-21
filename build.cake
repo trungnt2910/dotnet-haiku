@@ -120,10 +120,17 @@ Task("GenerateBindings")
 
     DotNetBuild($"generator/HaikuApiGenerator/HaikuApiGenerator.csproj", settings);
 
-    Environment.SetEnvironmentVariable("HAIKU_API_GENERATOR_OUTPUT_DIR", "out/generated");
-    Environment.SetEnvironmentVariable("LD_LIBRARY_PATH",
-        $"{Environment.GetEnvironmentVariable("LD_LIBRARY_PATH")}:{P.Combine(D.GetCurrentDirectory(), "external/CppSharp/bin/Release_x64")}");
-    DotNetRun($"generator/HaikuApiGenerator/HaikuApiGenerator.csproj");
+    var runSettings = new DotNetRunSettings
+    {
+        Configuration = configuration,
+        NoBuild = true,
+    };
+
+    runSettings.EnvironmentVariables.Add("HAIKU_API_GENERATOR_OUTPUT_DIR", "out/generated");
+    runSettings.EnvironmentVariables.Add("LD_LIBRARY_PATH",
+        $"{Environment.GetEnvironmentVariable("LD_LIBRARY_PATH")}:{P.Combine(D.GetCurrentDirectory(), $"external/CppSharp/bin/{configuration}_x64")}");
+
+    DotNetRun($"generator/HaikuApiGenerator/HaikuApiGenerator.csproj", runSettings);
 });
 
 Task("BuildCoreLibraries")
