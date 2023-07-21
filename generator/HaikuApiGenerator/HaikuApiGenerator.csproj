@@ -12,4 +12,8 @@
     <ProjectReference Include="$(_HaikuRootDirectory)/external/CppSharp/src/Generator/CppSharp.Generator.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="$(_HaikuRootDirectory)/external/CppSharp/bin/$(Configuration)_x64/lib/**" CopyToOutputDirectory="PreserveNewest" Link="lib/%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
 </Project>
