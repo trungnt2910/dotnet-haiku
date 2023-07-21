@@ -187,10 +187,12 @@ Task("BuildAndPackageWorkload")
             continue;
         }
 
-        buildSettings.MSBuildSettings = buildSettings.MSBuildSettings.WithProperty("_HaikuManifestVersionBand", band);
+        buildSettings.MSBuildSettings.Properties.Remove("_HaikuManifestVersionBand");
+        buildSettings.MSBuildSettings.Properties.Add("_HaikuManifestVersionBand", new [] { band });
         DotNetBuild("workload/Trungnt2910.NET.Sdk.Haiku/Trungnt2910.NET.Sdk.Haiku.csproj", buildSettings);
 
-        packSettings.MSBuildSettings = packSettings.MSBuildSettings.WithProperty("_HaikuManifestVersionBand", band);
+        packSettings.MSBuildSettings.Properties.Remove("_HaikuManifestVersionBand");
+        packSettings.MSBuildSettings.Properties.Add("_HaikuManifestVersionBand", new [] { band });
         DotNetPack("workload/Trungnt2910.NET.Sdk.Haiku/Trungnt2910.NET.Sdk.Haiku.csproj", packSettings);
     }
 });
