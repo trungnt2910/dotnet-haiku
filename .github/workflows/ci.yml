@@ -31,16 +31,16 @@ jobs:
         submodules: recursive
 
     - name: Install GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9.10
+      uses: gittools/actions/gitversion/setup@v0.10.2
       with:
         versionSpec: '5.x'
 
     - name: Determine Version
       id: gitversion
-      uses: gittools/actions/gitversion/execute@v0.9.10
+      uses: gittools/actions/gitversion/execute@v0.10.2
 
     - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.5
+      uses: NuGet/setup-nuget@v1.2.0
 
     - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
@@ -49,6 +49,9 @@ jobs:
 
     - name: Restore tools
       run: dotnet tool restore
+
+    - name: Install build dependencies
+      run: sudo apt install -y git cmake ninja-build
 
     - name: Build .NET rootfs
       run: |
@@ -64,13 +67,13 @@ jobs:
     - name: Fetch cached LLVM build
       uses: actions/cache@v3
       with:
-        path: external/CppSharp/build/llvm
+        path: external/CppSharp/build/llvm/*.tar.xz
         key: ${{ steps.llvm-build-id.outputs.id }}
 
     - name: Build and install workload
       run: |
         export ROOTFS_DIR=${{ github.workspace }}/rootfs
-        dotnet cake build.cake --target=InstallWorkload --configuration=$env:BUILD_CONFIG --build-version=${{ steps.gitversion.outputs.majorMinorPatch }} --package-version=${{ steps.gitversion.outputs.semVer }}
+        dotnet cake build.cake --target=InstallWorkload --configuration=${{ env.BUILD_CONFIG }} --build-version=${{ steps.gitversion.outputs.majorMinorPatch }} --package-version=${{ steps.gitversion.outputs.semVer }}
 
     - name: Publish nuget artifacts
       uses: actions/upload-artifact@v2
