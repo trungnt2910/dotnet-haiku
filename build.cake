@@ -1,7 +1,6 @@
 #load cake\TargetEnvironment.cake
 #load cake\Bash.cake
-#addin "Cake.FileHelpers&version=5.0.0"
-#addin "Cake.Incubator&version=7.0.0"
+#addin "Cake.Incubator&version=8.0.0"
 
 using D = System.IO.Directory;
 using F = System.IO.File;
