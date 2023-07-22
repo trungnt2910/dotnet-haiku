@@ -2,6 +2,33 @@
 
 An attempt to create a .NET SDK workload that provides the `net8.0-haiku` TFM.
 
+## Installation
+
+To install, run the `install-manifest.sh` script:
+
+```sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/trungnt2910/dotnet-haiku/HEAD/install-manifest.sh)"
+```
+
+The script requires `dotnet`, `curl`, `jq`, and `unzip` to be installed and be available in `$PATH`.
+It installs the latest version of the [advertising manifests](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-workload-install#advertising-manifests) for the Haiku workload.
+
+After that, the `haiku` workload will be available for install like any other workload:
+
+```sh
+dotnet workload install haiku
+```
+
+Note that you have to subscribe to **[@trungnt2910](https://github.com/trungnt2910)**'s GitHub Packages feed.
+If .NET for Haiku from the [dotnet-builds](https://github.com/trungnt2910/dotnet-builds/tree/master#installation) repository has already been installed, you have already subscribed to this feed.
+Otherwise, run:
+
+```sh
+dotnet nuget add source --username your_github_username --password your_github_token --store-password-in-clear-text --name dotnet_haiku_nuget "https://nuget.pkg.github.com/trungnt2910/index.json"
+```
+
+`your_github_token` should be a [personal access token](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-nuget-registry#authenticating-to-github-packages) with at least the `read:packages` permission.
+
 ## Building instructions
 
 ### Clone this repository
