@@ -144,7 +144,7 @@ class TargetEnvironment
 
     public static void InstallManifests(string manifestName, string manifestPackPath)
     {
-        var targetDirectory = P.Combine(DotNetManifestPath, manifestName);
+        var targetDirectory = P.Combine(DotNetManifestPath, manifestName.ToLowerInvariant());
         var tempDirectory = P.Combine(targetDirectory, "temp");
 
         // Delete existing installations to avoid conflict.
@@ -170,7 +170,7 @@ class TargetEnvironment
 
     public static void UninstallManifests(string manifestName)
     {
-        var targetDirectory = P.Combine(DotNetManifestPath, manifestName);
+        var targetDirectory = P.Combine(DotNetManifestPath, manifestName.ToLowerInvariant());
         if (D.Exists(targetDirectory))
         {
             D.Delete(targetDirectory, true);
