@@ -6,7 +6,8 @@
         "packs": [
           "Haiku.Sdk",
           "Haiku.Ref",
-          "Haiku.Runtime.haiku-x64"
+          "Haiku.Runtime.haiku-x64",
+          "Haiku.Templates"
         ],
         "platforms": [ "win-x64", "linux-x64", "osx-x64", "osx-arm64", "haiku-x64" ]
       }
