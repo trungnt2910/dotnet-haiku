@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "trungnt2910",
+  "classifications": [
+    "Haiku",
+    "GUI App"
+  ],
+  "name": "Haiku Application",
+  "identity": "Haiku.Application.CSharp",
+  "groupIdentity": "Haiku.Application",
+  "shortName": "haiku",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "HaikuNamespace",
+  "preferNameDirectory": true,
+  "symbols": {
+    "targetframework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "defaultValue": "net@HAIKUNETVERSION@-haiku",
+      "replaces": "$(FrameworkParameter)"
+    }
+  },
+  "primaryOutputs": [
+    { "path": "HaikuNamespace.csproj" }
+  ]
+}

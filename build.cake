@@ -83,6 +83,7 @@ Task("Restore")
         DotNetRestore($"workload/{name}/{name}.csproj");
     }
 
+    DotNetRestore("workload/Haiku.Templates/Haiku.Templates.csproj");
     DotNetRestore("workload/Trungnt2910.NET.Sdk.Haiku/Trungnt2910.NET.Sdk.Haiku.csproj");
     DotNetRestore("generator/HaikuApiGenerator/HaikuApiGenerator.csproj");
     DotNetRestore("generator/HaikuApiGenerator.PostProcessing/HaikuApiGenerator.PostProcessing.csproj");
@@ -191,6 +192,9 @@ Task("BuildAndPackageWorkload")
         DotNetPack($"workload/{name}/{name}.csproj", packSettings);
     }
 
+    DotNetBuild($"workload/Haiku.Templates/Haiku.Templates.csproj", buildSettings);
+    DotNetPack($"workload/Haiku.Templates/Haiku.Templates.csproj", packSettings);
+
     foreach (var band in supportedVersionBands)
     {
         if (!band.StartsWith($"{runtimeVersion}."))
@@ -230,6 +234,8 @@ Task("InstallWorkload")
         var packPath = $"out/nuget/{pack}";
         TargetEnvironment.InstallPack(realName, packageVersion, packPath);
     }
+    Console.WriteLine("Installing templates");
+    TargetEnvironment.InstallTemplatePack($"Haiku.Templates.{packageVersion}.nupkg", $"out/nuget/Haiku.Templates.{packageVersion}.nupkg");
     Console.WriteLine($"Registering \"haiku\" installed workload...");
     TargetEnvironment.RegisterInstalledWorkload("haiku");
 });
@@ -252,6 +258,8 @@ Task("UninstallWorkload")
         Console.WriteLine($"Removing {realName}");
         TargetEnvironment.UninstallPack(realName, version);
     }
+    Console.WriteLine("Removing templates");
+    TargetEnvironment.UninstallTemplatePack($"Haiku.Templates");
     Console.WriteLine($"Unregistering \"haiku\" installed workload...");
     TargetEnvironment.UnregisterInstalledWorkload("haiku");
 });

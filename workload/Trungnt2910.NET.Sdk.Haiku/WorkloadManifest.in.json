@@ -23,6 +23,10 @@
       "Haiku.Runtime.haiku-x64": {
         "kind": "framework",
         "version": "@VERSION@"
+      },
+      "Haiku.Templates": {
+        "kind": "template",
+        "version": "@VERSION@"
       }
     }
   }

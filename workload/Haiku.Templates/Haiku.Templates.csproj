@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.Build.NoTargets">
+
+  <Import Project="../Shared/Common.targets" />
+
+  <PropertyGroup>
+    <Description>
+.NET templates for Haiku. Installed with the Haiku workload.
+$(Description)
+    </Description>
+  </PropertyGroup>
+
+  <Import Project="../Shared/Templates.targets" />
+
+  <ItemGroup>
+    <_HaikuTemplateContent Include="content/**" />
+    <_HaikuTemplateContent Remove="**/*.in.*" />
+    <None Include="@(_HaikuTemplateContent)"
+      CopyToOutputDirectory="PreserveNewest"
+      Pack="true"
+      PackagePath="content"
+    />
+  </ItemGroup>
+
+  <Import Project="$(_HaikuRootDirectory)eng/ReplaceText.targets" />
+
+  <Target Name="_ReplaceJsonText"
+      BeforeTargets="Build;AssignTargetPaths"
+      Inputs="$(MSBuildProjectFile);content/Haiku.Application.CSharp/.template.config/template.in.json"
+      Outputs="$(IntermediateOutputPath)template.json">
+
+    <ReplaceText
+        Input="content/Haiku.Application.CSharp/.template.config/template.in.json"
+        Output="$(IntermediateOutputPath)template.json"
+        OldValue="@HAIKUNETVERSION@"
+        NewValue="$(_HaikuNetVersion)"
+    />
+
+    <ItemGroup>
+      <FileWrites Include="$(IntermediateOutputPath)template.json" />
+    </ItemGroup>
+  </Target>
+
+  <ItemGroup>
+    <None
+        Include="$(IntermediateOutputPath)template.json"
+        Link="content/Haiku.Application.CSharp/.template.config/template.json"
+        CopyToOutputDirectory="PreserveNewest"
+        Pack="true"
+        PackagePath="content/Haiku.Application.CSharp/.template.config/template.json"
+    />
+  </ItemGroup>
+
+</Project>

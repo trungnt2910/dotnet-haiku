@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "trungnt2910",
+  "classifications": [
+    "Haiku",
+    "UI"
+  ],
+  "name": "Haiku Window",
+  "identity": "Haiku.Window.CSharp",
+  "groupIdentity": "Haiku.Window",
+  "shortName": "haikuwindow",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "sourceName": "Haiku_Window",
+  "primaryOutputs": [
+    {
+      "path": "Haiku_Window.cs"
+    }
+  ],
+  "defaultName": "Haiku_Window",
+  "symbols": {
+    "namespace": {
+      "description": "Namespace for the generated files",
+      "replaces": "HaikuNamespace",
+      "type": "parameter"
+    }
+  }
+}
