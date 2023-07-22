@@ -31,6 +31,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="$(_HaikuRootDirectory)/out/generated/libHaikuGlue.so"
+          CopyToOutputDirectory="PreserveNewest" Link="runtimes/haiku-x64/native/libHaikuGlue.so"
+          Pack="true" PackagePath="runtimes/haiku-x64/native/libHaikuGlue.so" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="$(_HaikuRootDirectory)/generator/HaikuApiGenerator.PostProcessing/HaikuApiGenerator.PostProcessing.csproj" ReferenceOutputAssembly="false" />
   </ItemGroup>
 

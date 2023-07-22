@@ -132,25 +132,36 @@ Task("GenerateBindings")
     DotNetRun($"generator/HaikuApiGenerator/HaikuApiGenerator.csproj", runSettings);
 });
 
-Task("BuildCoreLibraries")
+Task("BuildAndPackCoreLibraries")
     .IsDependentOn("GenerateBindings")
     .Does(() =>
 {
-    var settings = new DotNetBuildSettings
+    var buildSettings = new DotNetBuildSettings
     {
         Configuration = configuration,
         MSBuildSettings = msbuildsettings,
         NoRestore = true
     };
 
+    var packSettings = new DotNetPackSettings
+    {
+        Configuration = configuration,
+        MSBuildSettings = msbuildsettings,
+        OutputDirectory = "out/nuget",
+        NoRestore = true,
+        NoBuild = true,
+        NoDependencies = true
+    };
+
     foreach (var name in coreLibraryNames)
     {
-        DotNetBuild($"src/{name}/{name}.csproj", settings);
+        DotNetBuild($"src/{name}/{name}.csproj", buildSettings);
+        DotNetPack($"src/{name}/{name}.csproj", packSettings);
     }
 });
 
 Task("BuildAndPackageWorkload")
-    .IsDependentOn("BuildCoreLibraries")
+    .IsDependentOn("BuildAndPackCoreLibraries")
     .Does(() =>
 {
     var buildSettings = new DotNetBuildSettings
