@@ -82,7 +82,7 @@ manifestInstallDir="$(dirname "$DOTNET_PATH")/sdk-manifests/$DOTNET_FEATURE_BAND
 
 tmpFilePath="$(mktemp)"
 curl -sL $manifestPackageUrl -u $GITHUB_USERNAME:$GITHUB_TOKEN -o $tmpFilePath
-unzip -j $tmpFilePath 'data/*.*' -d $manifestInstallDir
+unzip -o -j $tmpFilePath 'data/*.*' -d $manifestInstallDir
 rm $tmpFilePath
 
 echo "Installed manifest package to $manifestInstallDir"
