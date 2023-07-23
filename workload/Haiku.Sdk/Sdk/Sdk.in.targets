@@ -28,7 +28,7 @@
       LatestRuntimeFrameworkVersion="**FromWorkload**"
       TargetingPackName="Haiku.Ref"
       TargetingPackVersion="**FromWorkload**"
-      RuntimePackNamePatterns="Haiku.Runtime.haiku-x64"
+      RuntimePackNamePatterns="Haiku.Runtime.**RID**"
       RuntimePackRuntimeIdentifiers="haiku-x64"
       Profile="Haiku"
     />
