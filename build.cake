@@ -14,7 +14,7 @@ var target = Argument("target", "Default");
 var runtimeVersion = Argument("runtime-version", "8.0");
 
 var msbuildsettings = new DotNetMSBuildSettings();
-var supportedVersionBands = new List<string>() { "8.0.100-preview.4", "8.0.100-preview.5", "8.0.100-preview.6", "8.0.100-preview.7" };
+var supportedVersionBands = new List<string>() { "8.0.100-preview.4", "8.0.100-preview.5", "8.0.100-preview.6", "8.0.100-preview.7", "8.0.100-rc.1", "8.0.100-rc.2", "8.0.100" };
 
 const string manifestName = "Trungnt2910.NET.Sdk.Haiku";
 var manifestPack = $"{manifestName}.Manifest-{TargetEnvironment.DotNetCliFeatureBand}.{packageVersion}.nupkg";
