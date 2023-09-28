@@ -6,7 +6,7 @@
     <Content Include="@(_FrameworkListFile)" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="data" Link="data/%(FileName)%(Extension)" />
   </ItemGroup>
 
-  <Import Project="Sdk.props" Sdk="Microsoft.DotNet.SharedFramework.Sdk" Version="7.0.0-beta.23408.3" />
+  <Import Project="Sdk.props" Sdk="Microsoft.DotNet.SharedFramework.Sdk" Version="7.0.0-beta.23478.1" />
   <UsingTask TaskName="CreateFrameworkListFile" AssemblyFile="$(DotNetSharedFrameworkTaskFile)"/>
 
   <!-- https://github.com/dotnet/runtime/blob/0647ec314948904319da5eb15e9931f7c85ed1e2/src/installer/pkg/projects/Directory.Build.targets#L281 -->
