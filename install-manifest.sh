@@ -34,7 +34,13 @@ if [ "$prereleaseStart" -gt 0 ]; then
         secondDot=$(($secondDot + $firstDot))
     fi
 
-    DOTNET_FEATURE_BAND="${DOTNET_VERSION:0:$secondDot}"
+    prereleaseKind="${DOTNET_VERSION:$((prereleaseStart + 1)):$((firstDot - prereleaseStart - 1))}"
+
+    if [ "$prereleaseKind" = "servicing" ]; then
+        DOTNET_FEATURE_BAND="${DOTNET_VERSION:0:$((prereleaseStart - 2))}00"
+    else
+        DOTNET_FEATURE_BAND="${DOTNET_VERSION:0:$secondDot}"
+    fi
 else
     DOTNET_FEATURE_BAND="${DOTNET_VERSION:0:$((${#DOTNET_VERSION} - 2))}00"
 fi
