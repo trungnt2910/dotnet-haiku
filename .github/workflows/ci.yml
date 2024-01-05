@@ -44,9 +44,15 @@ jobs:
       uses: NuGet/setup-nuget@v1.2.0
 
     - name: Setup .NET 8 SDK
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
+
+    - name: Setup .NET 9 SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+        dotnet-quality: 'daily'
 
     - name: Restore tools
       run: dotnet tool restore
@@ -74,7 +80,9 @@ jobs:
     - name: Build and install workload
       run: |
         export ROOTFS_DIR=${{ github.workspace }}/rootfs
-        dotnet cake build.cake --target=InstallWorkload --configuration=${{ env.BUILD_CONFIG }} --build-version=${{ steps.gitversion.outputs.majorMinorPatch }} --package-version=${{ steps.gitversion.outputs.semVer }}
+        dotnet cake build.cake --target=BuildAndPackageWorkload --configuration=${{ env.BUILD_CONFIG }} --build-version=${{ steps.gitversion.outputs.majorMinorPatch }} --package-version=${{ steps.gitversion.outputs.semVer }} --runtime-version=8.0
+        # Only invoke the InstallWorkload target for the latest runtime version
+        dotnet cake build.cake --target=InstallWorkload --configuration=${{ env.BUILD_CONFIG }} --build-version=${{ steps.gitversion.outputs.majorMinorPatch }} --package-version=${{ steps.gitversion.outputs.semVer }} --runtime-version=9.0
 
     - name: Publish nuget artifacts
       uses: actions/upload-artifact@v2
