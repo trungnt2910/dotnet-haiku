@@ -64,8 +64,16 @@ class TargetEnvironment
             {
                 secondDot = dotnetVersion.Length;
             }
-            DotNetCliFeatureBand = dotnetVersion.Substring(0, secondDot);
             DotNetCliFeatureBandWithoutPreview = dotnetVersion.Substring(0, prereleaseStart);
+            var prereleaseKind = dotnetVersion.Substring(prereleaseStart + 1, firstDot - prereleaseStart - 1);
+            if (prereleaseKind == "servicing")
+            {
+                DotNetCliFeatureBand = dotnetVersion.Substring(0, prereleaseStart - 2) + "00";
+            }
+            else
+            {
+                DotNetCliFeatureBand = dotnetVersion.Substring(0, secondDot);
+            }
         }
         else
         {
