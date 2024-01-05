@@ -73,20 +73,25 @@ Task("Restore")
     .IsDependentOn("Clean")
     .Does(() =>
 {
+    var settings = new DotNetRestoreSettings
+    {
+        MSBuildSettings = msbuildsettings,
+    };
+
     foreach (var name in coreLibraryNames)
     {
-        DotNetRestore($"src/{name}/{name}.csproj");
+        DotNetRestore($"src/{name}/{name}.csproj", settings);
     }
 
     foreach (var name in packNames)
     {
-        DotNetRestore($"workload/{name}/{name}.csproj");
+        DotNetRestore($"workload/{name}/{name}.csproj", settings);
     }
 
-    DotNetRestore("workload/Haiku.Templates/Haiku.Templates.csproj");
-    DotNetRestore("workload/Trungnt2910.NET.Sdk.Haiku/Trungnt2910.NET.Sdk.Haiku.csproj");
-    DotNetRestore("generator/HaikuApiGenerator/HaikuApiGenerator.csproj");
-    DotNetRestore("generator/HaikuApiGenerator.PostProcessing/HaikuApiGenerator.PostProcessing.csproj");
+    DotNetRestore("workload/Haiku.Templates/Haiku.Templates.csproj", settings);
+    DotNetRestore("workload/Trungnt2910.NET.Sdk.Haiku/Trungnt2910.NET.Sdk.Haiku.csproj", settings);
+    DotNetRestore("generator/HaikuApiGenerator/HaikuApiGenerator.csproj", settings);
+    DotNetRestore("generator/HaikuApiGenerator.PostProcessing/HaikuApiGenerator.PostProcessing.csproj", settings);
 });
 
 Task("Clean")
