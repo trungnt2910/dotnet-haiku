@@ -40,6 +40,11 @@ public class ProcessConstantsAndEnumerationsPass : TranslationUnitPass
             goto skip;
         }
 
+        if (decl.Namespace.Namespace is Class)
+        {
+            goto skip;
+        }
+
         var symbolsClass = GetSymbolsClass(decl);
         if (decl.Namespace == symbolsClass)
         {

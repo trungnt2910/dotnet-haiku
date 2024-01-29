@@ -90,6 +90,20 @@ foreach (var file in Directory.EnumerateFiles(outputDir, "*.cs"))
     contents = Regex.Replace(contents, @"(_QuitDelegateHook\([^\)]*?\)[^}]*?\{[^}]*?(^\s*)[^}]*?BLooper[^}]*)(^\s+\})",
         "$1$2__target.__ownsNativeInstance = false;\n$2__target.Dispose(false, callNativeDtor: false );\n$3", RegexOptions.Multiline);
 
+    // Looks for `BAlignment` constructor calls affected by https://github.com/mono/CppSharp/issues/1822.
+    contents = Regex.Replace(contents, @"new global::Haiku\.Interface\.BAlignment\(B_([A-Za-z0-9_]*)[,\s]*B_([A-Za-z0-9_]*)\)", (match) =>
+    {
+        // Then patch the enum items.
+        return Regex.Replace(match.Value, @"B_([A-Za-z0-9_]*)[,\s]*B_([A-Za-z0-9_]*)", (match1) =>
+        {
+            var names = ((IList<Group>)match1.Groups).Skip(1).Select(g => string.Join("",
+                    g.Value.Split('_')
+                        .Select(token => token[0].ToString().ToUpperInvariant() + token[1..].ToLowerInvariant()))
+                ).ToArray();
+            return $"global::Haiku.Interface.Alignment.{names[0]}, global::Haiku.Interface.VerticalAlignment.{names[1]}";
+        });
+    });
+
     File.WriteAllText(file, contents);
 }
 
